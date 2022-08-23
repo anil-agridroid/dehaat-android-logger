@@ -70,7 +70,7 @@ class AuthInterceptOnStartData(
         }
 
         failureResponseBody?.let {
-            map[EventCategory.LogAuthenticatorIntercept.Info.ResponseMessage] = failureResponseBody
+            map[EventCategory.LogAuthenticatorIntercept.Info.Body] = failureResponseBody
         }
 
         map[EventCategory.LogAuthenticatorIntercept.Info.MethodAndUrl] = methodAndUrl

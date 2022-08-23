@@ -57,7 +57,7 @@ class ApiRequestData(
         }
 
         failureResponseBody?.let {
-            map[EventCategory.LogApiRequestIntercept.Info.ResponseMessage] = failureResponseBody
+            map[EventCategory.LogApiRequestIntercept.Info.Body] = failureResponseBody
         }
 
         map[EventCategory.LogApiRequestIntercept.Info.MethodAndUrl] = methodAndUrl
