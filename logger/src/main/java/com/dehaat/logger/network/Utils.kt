@@ -19,7 +19,16 @@ fun identifyRequest(request: Request): String {
 }
 
 fun Headers.appendKeyPrefix(prefix: String) = tryCatchWithReturn(tryBlock = {
-    this.associate {
-        "${prefix}${it.first}" to it.second
+
+    mutableMapOf<String, String>().apply {
+        this@appendKeyPrefix.forEach {
+            val key = it.first
+            val value = it.second
+            val isSensitiveInfo =
+                key.equals("Authorization", true) || value.startsWith("Bearer", true)
+            if (!isSensitiveInfo)
+                this["${prefix}${key}"] = value
+        }
     }
+
 }, catchBlock = { emptyMap() })
