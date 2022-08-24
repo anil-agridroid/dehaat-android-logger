@@ -1,6 +1,6 @@
 package com.dehaat.logger.network
 
-import com.dehaat.logger.tryCatchWithReturn
+import com.dehaat.logger.loggerTryCatchWithReturn
 import okhttp3.Headers
 import okhttp3.Request
 import okhttp3.internal.EMPTY_REQUEST
@@ -18,7 +18,7 @@ fun identifyRequest(request: Request): String {
     }
 }
 
-fun Headers.appendKeyPrefix(prefix: String) = tryCatchWithReturn(tryBlock = {
+fun Headers.appendKeyPrefix(prefix: String) = loggerTryCatchWithReturn(tryBlock = {
 
     mutableMapOf<String, String>().apply {
         this@appendKeyPrefix.forEach {

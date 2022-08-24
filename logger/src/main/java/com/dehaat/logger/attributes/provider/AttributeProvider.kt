@@ -1,5 +1,6 @@
 package com.dehaat.logger.attributes.provider
 
+import com.dehaat.logger.LoggerArgumentKey
 import com.dehaat.logger.infoprovider.ILoggerInfoProvider
 import com.dehaat.logger.attributes.AppInfoAttributes
 import com.dehaat.logger.attributes.ConnectionInfoAttributes
@@ -9,25 +10,33 @@ import javax.inject.Inject
 
 class AttributeProvider @Inject constructor(private val infoProvider: ILoggerInfoProvider) {
 
-    fun provideDeviceInfo() = DeviceInfoAttributes(
+    private fun provideDeviceInfo() = DeviceInfoAttributes(
         androidDeviceId = infoProvider.provideAndroidDeviceId(),
         googleAdId = infoProvider.provideGoogleADId()
     )
 
-    fun provideAppInfo() = AppInfoAttributes(
+    private fun provideAppInfo() = AppInfoAttributes(
         versionCode = infoProvider.provideVersionCode(),
         versionName = infoProvider.provideVersionName(),
         buildType = infoProvider.provideBuildType(),
     )
 
-    fun provideUserInfo() = UserInfoAttributes(
+    private fun provideUserInfo() = UserInfoAttributes(
         userId = infoProvider.provideLoggedInUserId(),
         userName = infoProvider.provideLoggedInUserName()
     )
 
-    fun provideConnectionInfo() = ConnectionInfoAttributes(
+    private fun provideConnectionInfo() = ConnectionInfoAttributes(
         connectedToNetwork = infoProvider.isConnectedToNetwork(),
     )
+
+    fun getCommonAttributeForEachLog() =
+        mutableMapOf<String, Any?>().apply {
+            put(LoggerArgumentKey.Log.LOCAL_LOGGING_TIME, System.currentTimeMillis())
+            this.putAll(provideDeviceInfo())
+            this.putAll(provideUserInfo())
+            this.putAll(provideConnectionInfo())
+        }
 }
 
 
