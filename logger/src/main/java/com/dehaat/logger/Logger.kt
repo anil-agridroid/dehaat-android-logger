@@ -131,7 +131,11 @@ object DehaatLogger {
 		}
 	}
 
-	private fun getFormattedMessage(logData: LogData) = LoggerUtils.getMessage(logData)
+	private fun getFormattedMessage(logData: LogData) = LoggerUtils.getMessage(logData.apply {
+		attributeProvider?.getCommonAttributeForEachMsgLog()?.takeIf { it.isNotEmpty() }?.let {
+			this.putAll(it)
+		}
+	})
 }
 
 interface IDehaatLogger : ICredentialProvider, IConfigProvider, ILoggerConfig,

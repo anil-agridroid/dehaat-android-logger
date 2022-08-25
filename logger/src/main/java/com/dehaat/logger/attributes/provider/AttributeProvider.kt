@@ -37,6 +37,8 @@ class AttributeProvider @Inject constructor(private val infoProvider: ILoggerInf
             this.putAll(provideUserInfo())
             this.putAll(provideConnectionInfo())
         }
+
+    fun getCommonAttributeForEachMsgLog() = infoProvider.provideCommonMapForEachLogMessage()
 }
 
 
