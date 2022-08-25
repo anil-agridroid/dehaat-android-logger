@@ -116,7 +116,7 @@ object DehaatLogger {
 					eventAttributes.forEach {
 						addAttribute(it.key, it.value)
 					}
-					addAttribute("dehaat_logger_version", "1.0.2")
+					addAttribute("dehaat_logger_version", "1.0.3")
 				}
 		}
 	}
