@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import com.dehaat.dehaat_logger_sample_app.databinding.ActivityMainBinding
+import com.dehaat.logger.DehaatLogger
 
 class MainActivity : AppCompatActivity() {
 
