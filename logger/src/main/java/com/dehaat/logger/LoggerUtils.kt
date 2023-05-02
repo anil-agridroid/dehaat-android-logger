@@ -1,7 +1,5 @@
 package com.dehaat.logger
 
-import android.util.Log
-import com.datadog.android.Datadog
 import com.dehaat.logger.events.EventCategory
 import com.dehaat.logger.network.*
 import okhttp3.Request
@@ -216,21 +214,6 @@ sealed class LoggingType {
 	object ERROR : LoggingType()
 	object DEBUG : LoggingType()
 	object VERBOSE : LoggingType()
-}
-
-inline fun ifDataDogInitialized(
-	funName: String,
-	nonInitializedBlock: () -> Unit = {
-		Log.d(TAG, "Data dog not initialised")
-	}, block: () -> Unit
-) {
-	if (Datadog.isInitialized()) {
-		block()
-	} else {
-		nonInitializedBlock()
-		DehaatLogger.provideLoggerNotInitializedHandler()
-			?.notInitialize(mapOf("functionName" to funName))
-	}
 }
 
 inline fun loggerTryCatch(tryBlock: () -> Unit = {}, catchBlock: (ex: Exception) -> Unit = {}) {

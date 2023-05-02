@@ -1,5 +1,6 @@
 package com.dehaat.logger.network
 
+import com.dehaat.logger.DehaatLogger.iLoggerConfig
 import com.dehaat.logger.LoggerUtils
 import com.dehaat.logger.loggerTryCatch
 import com.dehaat.logger.loggerTryCatchWithReturn
@@ -24,7 +25,9 @@ class DehaatNetworkLoggerInterceptor() : Interceptor {
 		loggerTryCatch(tryBlock = {
 			val map = ApiRequestData(request = request, response = response)
 			if (response.isSuccessful) {
-				LoggerUtils.logApiSuccess(map = map)
+				if (iLoggerConfig?.shouldLogAPISuccess() == true) {
+					LoggerUtils.logApiSuccess(map = map)
+				}
 			} else {
 				LoggerUtils.logApiFailure(map = map)
 			}
