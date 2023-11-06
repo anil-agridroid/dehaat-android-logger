@@ -6,11 +6,11 @@ plugins {
 android {
     namespace 'com.dehaat.logger'
 
-    compileSdk 31
+    compileSdk projectCompileSdkVersion
 
     defaultConfig {
-        minSdk 21
-        targetSdk 31
+        minSdk projectMinSdkVersion
+        targetSdk projectTargetSdkVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
